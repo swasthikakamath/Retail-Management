@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <style>
+        /* General page styling */
+        body {
+            background-color: #939b9c;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            color: #6f1d1b; /* Dark color for title */
+            font-weight: bold;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for the table */
+            border: 1px solid black
+        }
+
+        /* Header row styling */
+        thead th {
+            background-color: #6f1d1b;
+            color: white;
+            padding: 12px;
+            border: 1px solid black
+        }
+
+        /* Zebra striping for rows */
+        tbody tr:nth-of-type(even) {
+            background-color: #f9f9f9;
+            border: 1px solid black
+        }
+
+        tbody tr:nth-of-type(odd) {
+            background-color: #ffffff;
+            border: 1px solid black
+        }
+
+        /* Table row hover effect */
+        tbody tr:hover {
+            background-color: #ffe6a7; /* Light color on hover */
+           
+        }
+
+        /* Style for no sales row */
+        .no-sales {
+            color: #432818;
+            font-style: italic;
+        }
+
+        /* Table cell padding */
+        td {
+            padding: 15px;
+            font-size: 1rem;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            td, th {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #000000 !important; /* Set navbar background color to black */
+            padding: 10px 20px;
+        }
+
+        .navbar .navbar-brand, .navbar .nav-link {
+            color: #fff !important; /* Ensure text is white for better contrast */
+            font-weight: 600;
+        }
+
+        .navbar .navbar-brand:hover, .navbar .nav-link:hover {
+            color: #ffe6a7 !important; /* Light color for hover effect */
+        }
+
+        .navbar-toggler {
+            border-color: #fff !important; /* White border for toggler */
+        }
+
+        .navbar-toggler-icon {
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba(255, 255, 255, 0.7)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E') !important; /* White bars in the icon */
+        }
+
+        /* Responsive nav links */
+        .navbar-nav .nav-link {
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SMART RETAIL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'customer_dashboard' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item"></li>
+                        <a class="nav-link" href="{% url 'view_cart' %}">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout_view' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class="text-center">Sales Report</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity Sold</th>
+                        <th>Date of Sale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sale in sales %}
+                    <tr>
+                        <td>{{ sale.product.name }}</td>
+                        <td>{{ sale.quantity_purchased }}</td>
+                        <td>{{ sale.purchase_date }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center no-sales">No sales have been made yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

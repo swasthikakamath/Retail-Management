@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        /* Basic styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand {
+            float: left;
+            padding: 10px 15px;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .navbar-links {
+            float: right;
+        }
+        .navbar-links a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar-links a:hover {
+            background-color: #111;
+        }
+        /* Profile dropdown */
+        .profile-dropdown {
+            float: right;
+            overflow: hidden;
+        }
+        .profile-dropdown .profile-dropbtn {
+            font-size: 16px;  
+            border: none;
+            outline: none;
+            color: white;
+            background-color: inherit;
+            margin: 0;
+            padding: 14px 20px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .profile-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+            right:2rem;
+        }
+        .profile-dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .profile-dropdown-content a:hover {
+            background-color: #111;
+        }
+        .profile-dropdown:hover .profile-dropdown-content {
+            display: block;
+        }
+        .user-info{
+            margin-top:1rem;
+            color:red;
+            display:flex;
+            align-items:center;
+            justify-content: center;
+            padding:5px;
+        }
+
+        /* Light mode */
+        body.light-mode {
+            background-color: #f0f0f0;
+        }
+        .navbar.light-mode {
+            background-color: #eee;
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+        .navbar.dark-mode {
+            background-color: #111;
+        }
+        .navbar.dark-mode .navbar-brand {
+            color: #fff;
+        }
+        .navbar.dark-mode .navbar-links a {
+            color: #fff;
+        }
+        .navbar.dark-mode .profile-dropdown-content {
+            background-color: #111;
+        }
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px;
+        }
+        
+        .toggle-label {
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+        
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+        
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        
+        /* Dark mode */
+        .toggle-label.dark-mode {
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#" class="navbar-brand"><img src="" style="height:3rem;width:5rem;"></a>
+        <div class="navbar-links">
+            <a href="">Employee Details</a>
+            <a href="">System Details</a>
+            <a href="">Bill Details</a>
+            <a href="">Stock Details</a>
+            <a href="">Scrab Details</a>
+            <div class="profile-dropdown">
+                <button class="profile-dropbtn">Profile ▼</button>
+                <div class="profile-dropdown-content">
+                    <div class="user-info">
+                        <span>Welcome, {{ user.username }}</span>
+                    </div>
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="">Change Password</a>
+                    <a href="">Logout</a>
+                    <div class="toggle-container">
+                        <label class="toggle-label" for="toggle-mode">Light Mode</label>
+                        <label class="switch">
+                            <input type="checkbox" id="toggle-mode">
+                            <span class="slider round"></span>
+                        </label>
+                        <label class="toggle-label" for="toggle-mode">Dark Mode</label>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toggle button for light and dark mode -->
+    
+
+    <!-- Main content -->
+    <div class="main-content">
+        <!-- Add your main content here -->
+    </div>
+
+    <!-- JavaScript for toggling dark mode -->
+    <script>
+        // Function to set dark mode
+        function setDarkMode() {
+            document.body.classList.add('dark-mode');
+            document.querySelectorAll('.navbar').forEach(nav => nav.classList.add('dark-mode'));
+            localStorage.setItem('mode', 'dark'); // Save mode preference
+        }
+    
+        // Function to set light mode
+        function setLightMode() {
+            document.body.classList.remove('dark-mode');
+            document.querySelectorAll('.navbar').forEach(nav => nav.classList.remove('dark-mode'));
+            localStorage.setItem('mode', 'light'); // Save mode preference
+        }
+    
+        // Check mode preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const mode = localStorage.getItem('mode');
+            if (mode === 'dark') {
+                setDarkMode();
+            } else {
+                setLightMode();
+            }
+        });
+    
+        // Toggle mode when switch is clicked
+        const toggleMode = document.getElementById('toggle-mode');
+    
+        toggleMode.addEventListener('change', function() {
+            if (this.checked) {
+                setDarkMode();
+            } else {
+                setLightMode();
+            }
+        });
+    </script>
+</body>
+</html>

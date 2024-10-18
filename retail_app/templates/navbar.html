@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <title>Navbar</title>
+    <style>
+        /* Basic styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+        }
+        .navbar-brand {
+            float: left;
+            padding: 10px 15px;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .navbar-links {
+            float: right;
+        }
+        .navbar-links a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar-links a:hover {
+            background-color: #111;
+        }
+        /* Profile dropdown */
+        .profile-dropdown {
+            float: right;
+            overflow: hidden;
+        }
+        .profile-dropdown .profile-dropbtn {
+            font-size: 16px;  
+            border: none;
+            outline: none;
+            color: white;
+            background-color: inherit;
+            margin: 0;
+            padding: 14px 20px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .profile-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+            right:2rem;
+        }
+        .profile-dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .profile-dropdown-content a:hover {
+            background-color: #111;
+        }
+        .profile-dropdown:hover .profile-dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="#" class="navbar-brand"><img src="" style="height:3rem;width:5rem; "></a>
+    <div class="navbar-links">
+        <a href="{}">Employee Details</a>
+        <a href="{}">System Details</a>
+        <a href="{}">Bill Details</a>
+        <a href="{}">Stock Details</a>
+        <a href="{}">Scrab Details</a>
+        <div class="profile-dropdown">
+            <button class="profile-dropbtn">Profile ▼</button>
+            <div class="profile-dropdown-content">
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{}">Change Password</a>
+                <a href="{% url 'logout' %}">Logout</a>
+
+            </div>
+        </div>
+    
+    </div>
+   
+</div>
+
+</body>
+</html>
